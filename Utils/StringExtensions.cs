@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace VideoTools.Utils {
     public static class StringExtensions {
@@ -27,9 +28,12 @@ namespace VideoTools.Utils {
                 return "";
             }
 
-            var length = to - from + 1;
-            return str.Substring(from, length);
+            return str.Substring(from, to - from + 1);
         }
+
+        public static string CutStart(this string str, int charCount) => str.Slice(charCount, str.Length - 1);
+
+        public static string CutEnd(this string str, int charCount) => str.Slice(0, str.Length - 1 - charCount);
 
         public static string Replace(this string str, int from, int to, string newFragment) {
             var buf = new StringBuilder();

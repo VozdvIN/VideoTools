@@ -2,7 +2,7 @@
   "profiles": {
     "VideoTools": {
       "commandName": "Project",
-      "commandLineArgs": "insta360:x3:remove-prefixes C:\\_Home\\Temp\\1\\"
+      "commandLineArgs": "insta360:x3:group-files C:\\_Home\\Temp\\1\\"
     }
   }
 }

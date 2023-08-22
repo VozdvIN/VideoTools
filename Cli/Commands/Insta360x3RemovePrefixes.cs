@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VideoTools.Extensions;
+﻿using VideoTools.Extensions;
 
-namespace VideoTools.Cli.Commands
-{
-    public class Insta360x3RemovePrefixes : Command
-    {
+namespace VideoTools.Cli.Commands {
+    public class Insta360x3RemovePrefixes : Command {
         public override string Name => "insta360:x3:remove-prefixes";
 
         protected override string Description => "Remove prefixes `IMG_`, `LRV_` & `VID_` from filenames of camera files. WARNING: Command affects source files.";
@@ -20,6 +13,10 @@ namespace VideoTools.Cli.Commands
         public override void Execute(CommandArguments args, Action<string> onLog)
         {
             var workDirFullPath = args.GetPositionalArgumentOrDefault(1, Environment.CurrentDirectory);
+
+            if (!Directory.Exists(workDirFullPath)) {
+                throw new Exception($"Dir `{workDirFullPath}` does not exists.");
+            }
 
             var fileList = Directory.GetFiles(workDirFullPath)
                 .Where(filename => {

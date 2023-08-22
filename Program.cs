@@ -4,7 +4,7 @@ using VideoTools.Extensions;
 
 namespace VideoTools {
     internal class VideoTools {
-        const string VERSION = "0.0.1b";
+        const string VERSION = "0.2.1b";
 
         static void Main(string[] args) {
             Console.WriteLine($"Video Tools CLI, v{VERSION}, (C) Ilya Vozdvijensky, 2023\n");

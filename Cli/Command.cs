@@ -16,6 +16,7 @@ namespace VideoTools.Cli {
         protected StringBuilder _log = new();
 
         public static Dictionary<string, Command> Commands => new() {
+            { new Insta360x3GroupFiles().Name, new Insta360x3GroupFiles() },
             { new Insta360x3RemovePrefixes().Name, new Insta360x3RemovePrefixes() },
             { new ScriptingBatchDir().Name, new ScriptingBatchDir() }
         };
@@ -32,9 +33,8 @@ namespace VideoTools.Cli {
 
         public static string GetCommandsHelp() {
             var buffer = new StringBuilder();
-            buffer.AppendLine("Available commands:");
+            buffer.AppendLine("\nAvailable commands:\n");
             foreach (var cmdNameAndCmd in Commands) {
-                buffer.AppendLine("");
                 buffer.AppendLine(cmdNameAndCmd.Value.Help);
             }
             return buffer.ToString();
