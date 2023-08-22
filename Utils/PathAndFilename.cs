@@ -62,6 +62,18 @@ namespace VideoTools.Utils {
             return this;
         }
 
+
+        /// <summary>
+        /// Assign base name. Path and extension does not changed.
+        /// </summary>
+        public PathAndFilename SetBasename(string value)
+        {
+            value = value.Replace('/', '\\');
+            BaseName = ExtractBaseName(value);
+            Parse(FullFilename);
+            return this;
+        }
+
         public PathAndFilename SetExtension(string value) {
             Extension = value.Replace('/', '\\');
             Parse(FullFilename);

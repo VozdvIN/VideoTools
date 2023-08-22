@@ -11,10 +11,8 @@
     <Company>None</Company>
     <RepositoryUrl>https://github.com/VozdvIN/VideoTools</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Cli\Commands\" />
-  </ItemGroup>
 
 </Project>

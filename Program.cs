@@ -16,7 +16,7 @@ namespace VideoTools {
                 return;
             }
 
-            var commandPlans = CreateCommandPlans(argumentGroups);
+            var commandPlans = CommandPlan.CreateAll(argumentGroups);
 
             if (commandPlans.Count == 0) {
                 Console.Write(Command.GetCommandsHelp());
@@ -91,20 +91,6 @@ namespace VideoTools {
                 Console.WriteLine($"ERROR: {e.Message}");
                 Console.WriteLine("WARNING: Subsequent commands execution is cancelled.");
             }
-        }
-
-        protected static List<CommandPlan> CreateCommandPlans(List<CommandArguments> argumentGroups) {
-            var result = new List<CommandPlan>();
-            foreach (var argumentGroup in argumentGroups) {
-                try {
-                    result.Add(new CommandPlan(argumentGroup));
-                }
-                catch (Exception e) {
-                    Console.WriteLine($"ERROR: Argument group `{argumentGroup}` can not be parsed as command and its arguments: {e.Message}");
-                    result.Clear();
-                }
-            }
-            return result;
         }
     }
 }

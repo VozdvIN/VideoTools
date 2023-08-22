@@ -3,7 +3,7 @@ using System.Text;
 
 namespace VideoTools.Cli {
     abstract public class Command {
-        public string Help { get => Name + " " + ArgumentsTemplateInfo + "\n" + Description + "\n" + ArgumentsRoleInfo + "\n"; }
+        public string Help { get => $"{Name} {ArgumentsTemplateInfo}\n{Description}\n{ArgumentsRoleInfo}\n"; }
 
         public abstract string Name { get; }
 
@@ -15,8 +15,9 @@ namespace VideoTools.Cli {
 
         protected StringBuilder _log = new();
 
-        public static Dictionary<string, Func<Command>> Commands => new() {
-                { "scripting:batch:dir", () => new ScriptingBatchDir() }
+        public static Dictionary<string, Command> Commands => new() {
+            { new Insta360x3RemovePrefixes().Name, new Insta360x3RemovePrefixes() },
+            { new ScriptingBatchDir().Name, new ScriptingBatchDir() }
         };
 
         public abstract void Execute(CommandArguments args, Action<string> onLog);
@@ -26,7 +27,7 @@ namespace VideoTools.Cli {
                 throw new ArgumentException(string.Format("AnnotationTools.Cli.Services.Commands.Command.Factory: Command `{0}` is unknown.", commandName));
             }
 
-            return Commands[commandName]();
+            return Commands[commandName];
         }
 
         public static string GetCommandsHelp() {
@@ -34,7 +35,7 @@ namespace VideoTools.Cli {
             buffer.AppendLine("Available commands:");
             foreach (var cmdNameAndCmd in Commands) {
                 buffer.AppendLine("");
-                buffer.AppendLine(cmdNameAndCmd.Value().Help);
+                buffer.AppendLine(cmdNameAndCmd.Value.Help);
             }
             return buffer.ToString();
         }

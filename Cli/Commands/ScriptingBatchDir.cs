@@ -8,12 +8,8 @@
 
         public override string Name => "scripting:batch:dir";
 
-        protected override string Description => "If stands in the first place of the query performs execution of the other commands in the query for each file from specified dir, otherwise do nothing. Provide macro environment variables to use in query command arguments: " +
-            "`" + SOURCE_DIR_ALIAS + "`, " +
-            "`" + SOURCE_FILE_ALIAS + "`, " +
-            "`" + SOURCE_FILENAME_ALIAS + "`, " +
-            "`" + SOURCE_BASENAME_ALIAS + "`, " +
-            "`" + TARGET_DIR_ALIAS + "`";
+        protected override string Description => $"If stands in the first place of the query performs execution of the other commands in the query for each file from specified dir, otherwise do nothing." +
+            $"Provide macro environment variables to use in query command arguments: `{SOURCE_DIR_ALIAS}`, `{SOURCE_FILE_ALIAS}`, `{SOURCE_FILENAME_ALIAS}`, `{SOURCE_BASENAME_ALIAS}`, `{TARGET_DIR_ALIAS}`";
 
         protected override string ArgumentsTemplateInfo => "<source_dir> <target_dir> [-f]";
 
