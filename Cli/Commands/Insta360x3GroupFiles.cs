@@ -37,7 +37,22 @@ namespace VideoTools.Cli.Commands {
             foreach (var fullFilename in fileList) {
                 var sourceFullFilenameWrapper = fullFilename.AsPathAndFilename();
                 var targetFullFilenameWrapper = fullFilename.AsPathAndFilename();
-                targetFullFilenameWrapper.SetPath($"{sourceFullFilenameWrapper.Path}\\{sourceFullFilenameWrapper.BaseName.CutEnd(7)}");
+
+                var subscoreIndex = -1;
+                var countFromEnd = 0;
+                for (int i = sourceFullFilenameWrapper.BaseName.Length - 1; i >= 0; i--) {
+                    if (sourceFullFilenameWrapper.BaseName[i] == '_') {
+                        subscoreIndex = i;
+                        countFromEnd++;
+                    }
+                    if (countFromEnd == 2) {
+                        break;
+                    }
+                }
+
+                var targetDirName = sourceFullFilenameWrapper.BaseName.Slice(0, subscoreIndex - 1);
+
+                targetFullFilenameWrapper.SetPath($"{sourceFullFilenameWrapper.Path}\\{targetDirName}");
                 fileMovePlans.Add(new FileMovePlan() { sourceFullFileName = sourceFullFilenameWrapper.ToString(), targetFullFileName = targetFullFilenameWrapper.ToString() });
             }
 
